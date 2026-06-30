@@ -423,6 +423,37 @@ footer {
   color: var(--accent);
 }
 
+/* ---- Video showcase ---- */
+.video-section {
+  padding: 80px 0;
+}
+
+.video-frame {
+  margin-top: 40px;
+  background: var(--ink-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+}
+
+.video-caption {
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .container {
@@ -529,6 +560,28 @@ footer {
       <p>Edgeward turns the ATAK ecosystem into a drone orchestration platform. Operators draw zones and points of interest on the map they already use. The software plans missions, runs AI perception against the drone feed, and reports back through the same map.</p>
       <p class="muted" style="margin-top: 16px;">Operator-driven. Hardware-agnostic. Built on open standards.</p>
     </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Video showcase -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-label">In action</div>
+    <h2>Operator intent to autonomous mission, end-to-end.</h2>
+    <div class="video-frame">
+      <video
+        src="assets/edgeward-tactical.mp4"
+        controls
+        playsinline
+        preload="metadata"
+        poster=""
+      >
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-caption">Edgeward — tactical demonstration</div>
   </div>
 </section>
 
