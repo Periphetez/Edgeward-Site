@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edgeward — Logiciel d'autonomie tactique</title>
+<meta name="description" content="Edgeward est un logiciel d'autonomie tactique pour les opérations ISR de petites unités. Transforme l'écosystème ATAK en plateforme d'orchestration de drones, avec évitement air-air monoculaire intégré. Conçu au Canada, indépendant du matériel, bâti sur des normes ouvertes.">
+<link rel="alternate" hreflang="en" href="https://edgeward.ca/">
+<link rel="alternate" hreflang="fr" href="https://edgeward.ca/fr/">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edgeward.ca/fr/">
+<meta property="og:title" content="Edgeward — Logiciel d'autonomie tactique">
+<meta property="og:description" content="Exécution de mission autonome avec évitement d'aéronefs intégré. Transforme l'écosystème ATAK en plateforme d'orchestration de drones. Conçu au Canada, indépendant du matériel.">
+<meta property="og:image" content="https://edgeward.ca/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:locale:alternate" content="en_CA">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Edgeward — Logiciel d'autonomie tactique">
+<meta name="twitter:description" content="Exécution de mission autonome avec évitement d'aéronefs intégré. Conçu au Canada, indépendant du matériel.">
+<meta name="twitter:image" content="https://edgeward.ca/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0B1015;
+  --ink-elevated: #131820;
+  --paper: #F1EEE6;
+  --paper-muted: #8B95A1;
+  --rule: #2A323D;
+  --accent: #B23B3B;
+  --accent-muted: #8B2E2E;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Layout ---- */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ---- Horizon line — the signature device ---- */
+.horizon {
+  height: 1px;
+  background: var(--rule);
+  width: 100%;
+  margin: 0;
+  position: relative;
+}
+
+/* ---- Header ---- */
+header {
+  padding: 32px 0 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mark {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.wordmark {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+
+.header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 8px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lang-switch a {
+  color: var(--paper-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.lang-switch a:hover,
+.lang-switch a.active {
+  color: var(--accent);
+}
+
+.lang-switch span {
+  color: var(--rule);
+  margin: 0 6px;
+}
+
+/* ---- Hero ---- */
+.hero {
+  padding: 120px 0 100px;
+  position: relative;
+}
+
+.tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+/* ---- Bearing motif — the hero signature ---- */
+.bearing {
+  margin-top: 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 480px;
+}
+
+.bearing-viz {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.bearing-viz svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.bearing-ring {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.bearing-track {
+  fill: none;
+  stroke: var(--paper-muted);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  opacity: 0.6;
+}
+
+.bearing-mark {
+  fill: var(--accent);
+}
+
+.bearing-line {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+@keyframes bearingClose {
+  0% {
+    transform: translate(38px, -22px) scale(1);
+    opacity: 0.9;
+  }
+  85% {
+    transform: translate(2px, -1px) scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) scale(0.15);
+    opacity: 0;
+  }
+}
+
+.bearing-target {
+  animation: bearingClose 4.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  transform-origin: center;
+}
+
+.bearing-caption {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bearing-caption strong {
+  color: var(--paper);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bearing-target {
+    animation: none;
+    transform: translate(6px, -4px) scale(0.5);
+  }
+}
+
+h1 {
+  font-size: clamp(36px, 5.5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  margin-bottom: 32px;
+  max-width: 820px;
+}
+
+.hero-body {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--paper);
+  max-width: 640px;
+  margin-bottom: 0;
+}
+
+.hero-body .muted {
+  color: var(--paper-muted);
+}
+
+/* ---- Section ---- */
+section {
+  padding: 80px 0;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--accent);
+}
+
+h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  max-width: 720px;
+}
+
+.section-body {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--paper);
+  max-width: 720px;
+}
+
+.section-body p + p {
+  margin-top: 16px;
+}
+
+.section-body em {
+  color: var(--paper);
+  font-style: normal;
+  background: linear-gradient(180deg, transparent 60%, rgba(178, 59, 59, 0.18) 60%);
+  padding: 0 2px;
+}
+
+/* ---- Architecture diagram ---- */
+.arch {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  margin-top: 40px;
+  padding: 40px;
+  background: var(--ink-elevated);
+  border-radius: 4px;
+}
+
+.arch-node {
+  text-align: center;
+}
+
+.arch-node-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.arch-node-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 8px;
+}
+
+.arch-node-desc {
+  font-size: 13px;
+  color: var(--paper-muted);
+  line-height: 1.5;
+}
+
+.arch-arrow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  color: var(--paper-muted);
+}
+
+.arch-arrow svg {
+  display: block;
+}
+
+.arch-footer {
+  margin-top: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--paper-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ---- Capabilities (4-column) ---- */
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.capability {
+  border-top: 2px solid var(--accent);
+  padding-top: 24px;
+}
+
+.capability h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.capability p {
+  font-size: 14px;
+  color: var(--paper-muted);
+  line-height: 1.6;
+}
+
+/* ---- Status section ---- */
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 40px;
+}
+
+.status-list {
+  list-style: none;
+}
+
+.status-list li {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px 0 12px 18px;
+  border-top: 1px solid var(--rule);
+  position: relative;
+  color: var(--paper);
+}
+
+.status-list li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.status-list li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  position: absolute;
+  left: 0;
+  top: 20px;
+}
+
+.specs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.spec {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.spec-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--paper-muted);
+  margin-bottom: 4px;
+}
+
+.spec-value {
+  font-size: 14px;
+  color: var(--paper);
+  font-weight: 500;
+}
+
+.section-subhead {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ---- Use cases ---- */
+.use-cases {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.use-case {
+  padding: 24px 0 24px 20px;
+  border-left: 2px solid var(--accent);
+}
+
+.use-case h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--paper);
+}
+
+.use-case p {
+  font-size: 13px;
+  color: var(--paper-muted);
+  line-height: 1.55;
+}
+
+/* ---- Footer ---- */
+footer {
+  padding: 80px 0 60px;
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-mark {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-wordmark {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.footer-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+.footer-contact {
+  text-align: right;
+}
+
+.footer-contact-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--paper-muted);
+  margin-bottom: 4px;
+}
+
+.footer-contact a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--paper);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: color 0.15s;
+}
+
+.footer-contact a:hover {
+  color: var(--accent);
+}
+
+.footer-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.footer-icon-link {
+  border-bottom: none !important;
+  display: flex;
+  align-items: center;
+}
+
+/* ---- Video showcase ---- */
+.video-section {
+  padding: 80px 0;
+}
+
+.video-frame {
+  margin-top: 40px;
+  background: var(--ink-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+}
+
+.video-caption {
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+/* ---- Partnerships ---- */
+.partnerships-body {
+  max-width: 640px;
+  margin-top: 24px;
+}
+
+.partnerships-body p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--paper);
+}
+
+.partnerships-body p + p {
+  margin-top: 16px;
+}
+
+.partnerships-cta {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 3px;
+  transition: color 0.15s, gap 0.15s;
+}
+
+.partnerships-cta:hover {
+  color: var(--accent);
+  gap: 14px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding: 60px 0 80px;
+  }
+
+  section {
+    padding: 56px 0;
+  }
+
+  .arch {
+    grid-template-columns: 1fr;
+    padding: 28px;
+    gap: 20px;
+  }
+
+  .arch-arrow {
+    transform: rotate(90deg);
+  }
+
+  .capabilities {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .bearing {
+    margin-top: 48px;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .use-cases {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .capabilities {
+    grid-template-columns: 1fr;
+  }
+
+  .bearing {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* ---- Subtle entry animation ---- */
+@keyframes horizonReveal {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.horizon {
+  animation: horizonReveal 600ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horizon {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="header-meta">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#F1EEE6">
+            <rect x="64" y="340" width="384" height="12"/>
+            <polygon points="256,192 272,192 344,296 316,296 256,210 196,296 168,296"/>
+          </g>
+        </svg>
+        <div class="wordmark">Edgeward</div>
+      </div>
+      <div class="header-right">
+        <div class="lang-switch">
+          <a href="/">EN</a><span>/</span><a href="/fr/" class="active">FR</a>
+        </div>
+        <div>Canada — préversion</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="horizon"></div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="tagline">Logiciel d'autonomie tactique</div>
+    <h1>La couche logicielle qui relie l'intention de l'opérateur à la mission, pour l'ISR de petites unités.</h1>
+    <div class="hero-body">
+      <p>Edgeward transforme l'écosystème ATAK en plateforme d'orchestration de drones. Les opérateurs dessinent des zones et des points d'intérêt sur la carte qu'ils utilisent déjà. Le logiciel planifie la mission, surveille les autres aéronefs en cours de route, et rend compte par la même carte.</p>
+      <p class="muted" style="margin-top: 16px;">Piloté par l'opérateur. Indépendant du matériel. Bâti sur des normes ouvertes.</p>
+    </div>
+
+    <div class="bearing">
+      <div class="bearing-viz">
+        <svg viewBox="0 0 84 84">
+          <circle class="bearing-ring" cx="42" cy="42" r="40"/>
+          <line class="bearing-track" x1="42" y1="42" x2="80" y2="20"/>
+          <g class="bearing-target">
+            <circle class="bearing-mark" cx="42" cy="42" r="3.5"/>
+          </g>
+          <line class="bearing-line" x1="42" y1="42" x2="42" y2="10"/>
+        </svg>
+      </div>
+      <div class="bearing-caption">
+        <strong>Relèvement constant, distance décroissante.</strong>
+        Le même principe qu'utilisent pilotes et vigies navales depuis des décennies — exécuté ici à partir d'une seule caméra monoculaire, sans LiDAR.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Video showcase -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-label">En action</div>
+    <h2>De l'intention de l'opérateur à la mission autonome, de bout en bout.</h2>
+    <div class="video-frame">
+      <video
+        src="../assets/edgeward-tactical.mp4"
+        controls
+        playsinline
+        preload="metadata"
+        poster=""
+      >
+        Votre navigateur ne prend pas en charge la balise vidéo.
+      </video>
+    </div>
+    <div class="video-caption">Edgeward — démonstration tactique</div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- The Gap -->
+<section>
+  <div class="container">
+    <div class="section-label">Le vide que nous comblons</div>
+    <div class="section-body">
+      <p>Les petites unités modernes transportent des drones, et elles transportent ATAK. Le vide que personne n'a comblé proprement, c'est le logiciel entre les deux — la couche qui transforme l'intention de l'opérateur sur une carte tactique en missions ISR autonomes, et qui transforme les images du drone en renseignement exploitable auquel l'opérateur peut faire confiance.</p>
+      <p>Edgeward est cette couche. L'opérateur dessine une zone, marque un point d'intérêt, ou demande une orbite. Edgeward planifie la mission, exécute la perception sur le flux vidéo, et rend compte par la même carte.</p>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- How It Works -->
+<section>
+  <div class="container">
+    <div class="section-label">Comment ça fonctionne</div>
+    <h2>Trois niveaux, un protocole, aucune dépendance à un fournisseur.</h2>
+
+    <div class="arch">
+      <div class="arch-node">
+        <div class="arch-node-label">Opérateur</div>
+        <div class="arch-node-title">ATAK / WinTAK</div>
+        <div class="arch-node-desc">Carte tactique.<br>Dessine des zones.<br>Approuve les missions.</div>
+      </div>
+
+      <div class="arch-arrow">
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M0 5 L26 5 M22 1 L26 5 L22 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M32 5 L6 5 M10 1 L6 5 L10 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="arch-node">
+        <div class="arch-node-label">Edgeward</div>
+        <div class="arch-node-title">IA + orchestration</div>
+        <div class="arch-node-desc">Perception.<br>Comportement.<br>Planification de mission.</div>
+      </div>
+
+      <div class="arch-arrow">
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M0 5 L26 5 M22 1 L26 5 L22 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M32 5 L6 5 M10 1 L6 5 L10 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="arch-node">
+        <div class="arch-node-label">Drone</div>
+        <div class="arch-node-title">MAVLink / DJI / Skydio</div>
+        <div class="arch-node-desc">Suit la route.<br>Diffuse la vidéo.<br>Rend compte de son état.</div>
+      </div>
+    </div>
+
+    <div class="arch-footer">
+      Toutes les communications via Cursor-on-Target (CoT) sur UDP.<br>
+      Aucun protocole propriétaire. Aucune dépendance à un fournisseur.
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Capabilities -->
+<section>
+  <div class="container">
+    <div class="section-label">Capacités</div>
+    <h2>Une seule couche logicielle, quatre fonctions.</h2>
+
+    <div class="capabilities">
+      <div class="capability">
+        <h3>Perception</h3>
+        <p>Détection d'objets et classification de comportements en temps réel sur du matériel en périphérie. Six règles configurables : flânerie, franchissement de périmètre, activité hors heures, débarquement de véhicule, convergence, approche de clôture.</p>
+      </div>
+      <div class="capability">
+        <h3>Évitement</h3>
+        <p>Détecte et suit les aéronefs à proximité à partir d'une seule caméra monoculaire. Le suivi basé uniquement sur l'angle, adapté de recherches navales et aéronautiques publiées sur l'évitement de collision, estime le temps avant l'approche la plus rapprochée sans nécessiter de LiDAR ni de distance absolue.</p>
+      </div>
+      <div class="capability">
+        <h3>Coordination</h3>
+        <p>Cursor-on-Target bidirectionnel. Les opérateurs dessinent des zones et des points d'intérêt sur la carte qu'ils utilisent déjà; Edgeward les intègre comme politique de comportement en direct et publie en retour des alertes et des propositions de mission.</p>
+      </div>
+      <div class="capability">
+        <h3>Exécution</h3>
+        <p>Génère des routes d'orbite, de tonte et de patrouille à partir de l'intention de l'opérateur. Les routes apparaissent sur la carte ATAK pour révision; l'opérateur approuve; le module UAS Tool les traduit en MAVLink. L'opérateur demeure dans la boucle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Status & Standards -->
+<section>
+  <div class="container">
+    <div class="section-label">État actuel</div>
+    <h2>Prototype fonctionnel. Testé de bout en bout.</h2>
+
+    <div class="status-grid">
+      <div>
+        <div class="section-subhead">Validé à ce jour</div>
+        <ul class="status-list">
+          <li>Chaîne de perception en périphérie sur NVIDIA Jetson : détection YOLOv8 + suivi multi-objets ByteTrack</li>
+          <li>Évitement air-air à partir d'une seule caméra monoculaire — aucun LiDAR requis</li>
+          <li>Suivi basé uniquement sur l'angle validé avec une précision de 0,8 à 5,0 % sur le temps avant l'approche la plus rapprochée, selon plusieurs géométries de rapprochement</li>
+          <li>Chaîne complète de détection à alerte validée de bout en bout sur un véritable contrôleur de vol</li>
+          <li>Prise en charge de deux pilotes automatiques — ArduPilot et PX4</li>
+          <li>Cursor-on-Target bidirectionnel — alertes sortantes, zones dessinées entrantes</li>
+          <li>Conçu en mode « fantôme » : la fiabilité des alertes d'évitement est prouvée avant l'activation de toute action de contrôle autonome</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="section-subhead">Normes et intégration</div>
+        <div class="specs">
+          <div class="spec">
+            <div class="spec-label">Protocole C2</div>
+            <div class="spec-value">Cursor-on-Target (CoT) sur UDP</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Plateformes C2</div>
+            <div class="spec-value">ATAK · WinTAK · iTAK · TAK Server</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Interface drone</div>
+            <div class="spec-value">MAVLink via ATAK UAS Tool</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Pilotes automatiques</div>
+            <div class="spec-value">ArduPilot · PX4 · tout système de classe MAVLink</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Calcul en périphérie</div>
+            <div class="spec-value">NVIDIA Jetson Orin Nano (compatible Orin NX)</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Voie de conformité</div>
+            <div class="spec-value">Composants du cadre Blue UAS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Use Cases -->
+<section>
+  <div class="container">
+    <div class="section-label">Cas d'usage ciblés</div>
+    <h2>Tactique et à double usage.</h2>
+
+    <div class="use-cases">
+      <div class="use-case">
+        <h3>Périmètre de base d'opérations avancée</h3>
+        <p>Surveillance persistante des approches de la base selon des règles d'engagement ajustées par l'opérateur.</p>
+      </div>
+      <div class="use-case">
+        <h3>Infrastructures critiques</h3>
+        <p>Surveillance de périmètre pour sites énergétiques, portuaires et centres de données, avec réaffectation autonome.</p>
+      </div>
+      <div class="use-case">
+        <h3>Feux de forêt et intervention d'urgence</h3>
+        <p>Zones de recherche définies par l'opérateur, détection en temps réel de points chauds et de victimes, coordination autonome avec des plateformes à forte capacité de charge.</p>
+      </div>
+      <div class="use-case">
+        <h3>Recherche et sauvetage / CASEVAC</h3>
+        <p>Recherches de zone par motifs systématiques, géolocalisation des sujets, coordination de l'extraction assistée par drone via les systèmes C2 existants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Partnerships -->
+<section>
+  <div class="container">
+    <div class="section-label">Partenariats</div>
+    <h2>Construit avec celles et ceux qui le feront voler.</h2>
+    <div class="partnerships-body">
+      <p>Edgeward est conçu pour s'intégrer aux plateformes de drones existantes comme couche logicielle, et non pour les remplacer. Nous explorons activement des partenariats avec des fabricants de drones, des intégrateurs matériels et des fournisseurs de systèmes de défense et de sécurité publique — notamment dans le cadre de l'Initiative de drones de défense du Canada.</p>
+      <p>Si vous construisez quelque chose où cette technologie pourrait s'intégrer, nous aimerions en discuter avec vous.</p>
+      <a class="partnerships-cta" href="mailto:contact@edgeward.ca">Amorcer une conversation →</a>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-left">
+          <svg class="footer-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#F1EEE6">
+              <rect x="64" y="340" width="384" height="12"/>
+              <polygon points="256,192 272,192 344,296 316,296 256,210 196,296 168,296"/>
+            </g>
+          </svg>
+          <div class="footer-wordmark">Edgeward</div>
+        </div>
+        <div class="footer-meta" style="margin-top: 8px;">Technologie de défense développée au Canada · Edgeward Inc.</div>
+      </div>
+      <div class="footer-contact">
+        <div class="footer-contact-label">Contact</div>
+        <div class="footer-contact-row">
+          <a href="mailto:contact@edgeward.ca">contact@edgeward.ca</a>
+          <a class="footer-icon-link" href="https://www.linkedin.com/company/edgewardisr/" target="_blank" rel="noopener noreferrer" aria-label="Edgeward on LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.554V9h3.565v11.452z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
