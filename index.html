@@ -4,7 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Edgeward — Tactical autonomy software</title>
-<meta name="description" content="Edgeward is tactical autonomy software for small-unit ISR operations. Turns the ATAK ecosystem into a drone orchestration platform. Canadian-built, hardware-agnostic, built on open standards.">
+<meta name="description" content="Edgeward is tactical autonomy software for small-unit ISR operations. Turns the ATAK ecosystem into a drone orchestration platform, with monocular aircraft-to-aircraft avoidance built in. Canadian-built, hardware-agnostic, built on open standards.">
+<link rel="alternate" hreflang="en" href="https://edgeward.ca/">
+<link rel="alternate" hreflang="fr" href="https://edgeward.ca/fr/">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edgeward.ca/">
+<meta property="og:title" content="Edgeward — Tactical autonomy software">
+<meta property="og:description" content="Autonomous mission execution with built-in aircraft avoidance. Turns the ATAK ecosystem into a drone orchestration platform. Canadian-built, hardware-agnostic.">
+<meta property="og:image" content="https://edgeward.ca/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_CA">
+<meta property="og:locale:alternate" content="fr_CA">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Edgeward — Tactical autonomy software">
+<meta name="twitter:description" content="Autonomous mission execution with built-in aircraft avoidance. Canadian-built, hardware-agnostic.">
+<meta name="twitter:image" content="https://edgeward.ca/assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -93,9 +115,32 @@ header {
   padding-top: 8px;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lang-switch a {
+  color: var(--paper-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.lang-switch a:hover,
+.lang-switch a.active {
+  color: var(--accent);
+}
+
+.lang-switch span {
+  color: var(--rule);
+  margin: 0 6px;
+}
+
 /* ---- Hero ---- */
 .hero {
-  padding: 120px 0 140px;
+  padding: 120px 0 100px;
+  position: relative;
 }
 
 .tagline {
@@ -105,6 +150,94 @@ header {
   letter-spacing: 0.12em;
   color: var(--accent);
   margin-bottom: 32px;
+}
+
+/* ---- Bearing motif — the hero signature ---- */
+.bearing {
+  margin-top: 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 480px;
+}
+
+.bearing-viz {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.bearing-viz svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.bearing-ring {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.bearing-track {
+  fill: none;
+  stroke: var(--paper-muted);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  opacity: 0.6;
+}
+
+.bearing-mark {
+  fill: var(--accent);
+}
+
+.bearing-line {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+@keyframes bearingClose {
+  0% {
+    transform: translate(38px, -22px) scale(1);
+    opacity: 0.9;
+  }
+  85% {
+    transform: translate(2px, -1px) scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) scale(0.15);
+    opacity: 0;
+  }
+}
+
+.bearing-target {
+  animation: bearingClose 4.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  transform-origin: center;
+}
+
+.bearing-caption {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bearing-caption strong {
+  color: var(--paper);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bearing-target {
+    animation: none;
+    transform: translate(6px, -4px) scale(0.5);
+  }
 }
 
 h1 {
@@ -238,11 +371,11 @@ h2 {
   text-align: center;
 }
 
-/* ---- Capabilities (3-column) ---- */
+/* ---- Capabilities (4-column) ---- */
 .capabilities {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
   margin-top: 40px;
 }
 
@@ -467,6 +600,43 @@ footer {
   text-align: center;
 }
 
+/* ---- Partnerships ---- */
+.partnerships-body {
+  max-width: 640px;
+  margin-top: 24px;
+}
+
+.partnerships-body p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--paper);
+}
+
+.partnerships-body p + p {
+  margin-top: 16px;
+}
+
+.partnerships-cta {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 3px;
+  transition: color 0.15s, gap 0.15s;
+}
+
+.partnerships-cta:hover {
+  color: var(--accent);
+  gap: 14px;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .container {
@@ -492,8 +662,12 @@ footer {
   }
 
   .capabilities {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 28px;
+  }
+
+  .bearing {
+    margin-top: 48px;
   }
 
   .status-grid {
@@ -513,6 +687,18 @@ footer {
 
   .footer-contact {
     text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .capabilities {
+    grid-template-columns: 1fr;
+  }
+
+  .bearing {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 }
 
@@ -557,7 +743,12 @@ footer {
         </svg>
         <div class="wordmark">Edgeward</div>
       </div>
-      <div>Canada — pre-release</div>
+      <div class="header-right">
+        <div class="lang-switch">
+          <a href="/" class="active">EN</a><span>/</span><a href="/fr/">FR</a>
+        </div>
+        <div>Canada — pre-release</div>
+      </div>
     </div>
   </div>
 </header>
@@ -570,8 +761,25 @@ footer {
     <div class="tagline">Tactical autonomy software</div>
     <h1>The operator-canvas-to-mission layer for small-unit ISR.</h1>
     <div class="hero-body">
-      <p>Edgeward turns the ATAK ecosystem into a drone orchestration platform. Operators draw zones and points of interest on the map they already use. The software plans missions, runs AI perception against the drone feed, and reports back through the same map.</p>
+      <p>Edgeward turns the ATAK ecosystem into a drone orchestration platform. Operators draw zones and points of interest on the map they already use. The software plans the mission, watches for other aircraft along the way, and reports back through the same map.</p>
       <p class="muted" style="margin-top: 16px;">Operator-driven. Hardware-agnostic. Built on open standards.</p>
+    </div>
+
+    <div class="bearing">
+      <div class="bearing-viz">
+        <svg viewBox="0 0 84 84">
+          <circle class="bearing-ring" cx="42" cy="42" r="40"/>
+          <line class="bearing-track" x1="42" y1="42" x2="80" y2="20"/>
+          <g class="bearing-target">
+            <circle class="bearing-mark" cx="42" cy="42" r="3.5"/>
+          </g>
+          <line class="bearing-line" x1="42" y1="42" x2="42" y2="10"/>
+        </svg>
+      </div>
+      <div class="bearing-caption">
+        <strong>Constant bearing, decreasing range.</strong>
+        The same principle pilots and naval lookouts have used for decades — now run from a single monocular camera, no LiDAR required.
+      </div>
     </div>
   </div>
 </section>
@@ -670,12 +878,16 @@ footer {
 <section>
   <div class="container">
     <div class="section-label">Capabilities</div>
-    <h2>One software layer, three jobs.</h2>
+    <h2>One software layer, four jobs.</h2>
 
     <div class="capabilities">
       <div class="capability">
         <h3>Perception</h3>
         <p>Real-time object detection and behavior classification on edge hardware. Six configurable rules: loitering, perimeter breach, after-hours, vehicle dismount, convergence, fence approach.</p>
+      </div>
+      <div class="capability">
+        <h3>Avoidance</h3>
+        <p>Detects and tracks nearby aircraft from a single monocular camera. Bearings-only tracking, adapted from published naval and aviation collision-avoidance research, estimates time-to-closest-approach without needing LiDAR or absolute range.</p>
       </div>
       <div class="capability">
         <h3>Coordination</h3>
@@ -699,15 +911,15 @@ footer {
 
     <div class="status-grid">
       <div>
-        <div class="section-subhead">Shipping today</div>
+        <div class="section-subhead">Validated today</div>
         <ul class="status-list">
-          <li>AI inference pipeline on NVIDIA Jetson Orin Nano</li>
-          <li>YOLOv8 detection + ByteTrack multi-object tracking</li>
-          <li>Six behavior classifiers with operator-tuneable thresholds</li>
-          <li>GStreamer UDP H.264 video relay with burned-in AI overlays</li>
-          <li>Two-way Cursor-on-Target — alerts out, drawn shapes in</li>
-          <li>PX4 SITL + Gazebo Harmonic simulation environment</li>
-          <li>574 tests passing — end-to-end sim loop validated</li>
+          <li>On-device perception pipeline on NVIDIA Jetson: YOLOv8 detection + ByteTrack multi-object tracking</li>
+          <li>Aircraft-to-aircraft avoidance from a single monocular camera — no LiDAR required</li>
+          <li>Bearings-only tracking validated to 0.8–5.0% time-to-closest-approach accuracy across multiple closing geometries</li>
+          <li>Full detection-to-alert chain validated end-to-end on real flight-controller hardware</li>
+          <li>Dual autopilot support — ArduPilot and PX4</li>
+          <li>Two-way Cursor-on-Target — alerts out, drawn zones in</li>
+          <li>Ghost-mode by design: avoidance alerting is proven before any autonomous control action is enabled</li>
         </ul>
       </div>
 
@@ -769,6 +981,21 @@ footer {
         <h3>Search &amp; rescue / CASEVAC</h3>
         <p>Pattern-based area searches, geotagged subject location, drone-assisted extraction coordination via existing C2 systems.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Partnerships -->
+<section>
+  <div class="container">
+    <div class="section-label">Partnerships</div>
+    <h2>Building this with the people who'll fly it.</h2>
+    <div class="partnerships-body">
+      <p>Edgeward is built to integrate onto existing drone platforms as a software layer, not to replace them. We're actively exploring partnerships with drone manufacturers, hardware integrators, and defence and public-safety system providers — including through Canada's Defence Drone Initiative.</p>
+      <p>If you're building something this could plug into, we'd like to hear from you.</p>
+      <a class="partnerships-cta" href="mailto:contact@edgeward.ca">Start a conversation →</a>
     </div>
   </div>
 </section>
