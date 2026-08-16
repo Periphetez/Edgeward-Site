@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Edgeward — Tactical autonomy software</title>
-<meta name="description" content="Edgeward is tactical autonomy software for small-unit ISR operations. Turns the ATAK ecosystem into a drone orchestration platform, with monocular aircraft-to-aircraft avoidance built in. Canadian-built, hardware-agnostic, built on open standards.">
+<meta name="description" content="See everything. Decide first. Trust the mission. Edgeward is tactical autonomy software for small-unit ISR operations. Turns the ATAK ecosystem into a drone orchestration platform. Canadian-built, hardware-agnostic, built on open standards.">
 <link rel="alternate" hreflang="en" href="https://edgeward.ca/">
 <link rel="alternate" hreflang="fr" href="https://edgeward.ca/fr/">
 
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://edgeward.ca/">
 <meta property="og:title" content="Edgeward — Tactical autonomy software">
-<meta property="og:description" content="Autonomous mission execution with built-in aircraft avoidance. Turns the ATAK ecosystem into a drone orchestration platform. Canadian-built, hardware-agnostic.">
+<meta property="og:description" content="See everything. Decide first. Trust the mission. Tactical autonomy software that turns the ATAK ecosystem into a drone orchestration platform. Canadian-built, hardware-agnostic.">
 <meta property="og:image" content="https://edgeward.ca/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -25,7 +25,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Edgeward — Tactical autonomy software">
-<meta name="twitter:description" content="Autonomous mission execution with built-in aircraft avoidance. Canadian-built, hardware-agnostic.">
+<meta name="twitter:description" content="See everything. Decide first. Trust the mission. Tactical autonomy software for the ATAK ecosystem. Canadian-built, hardware-agnostic.">
 <meta name="twitter:image" content="https://edgeward.ca/assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,15 +141,49 @@ header {
 .hero {
   padding: 120px 0 100px;
   position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 85% at 92% -8%, rgba(178, 59, 59, 0.16), transparent 58%),
+    radial-gradient(ellipse 50% 55% at 6% 108%, rgba(16, 32, 48, 0.5), transparent 62%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -12%;
+  left: -6%;
+  width: 62%;
+  height: 130%;
+  background: url('/assets/topo-overlay.svg') no-repeat left top;
+  background-size: cover;
+  opacity: 0.11;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 100%);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .tagline {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.10em;
   color: var(--accent);
   margin-bottom: 32px;
+  line-height: 1.7;
 }
 
 /* ---- Bearing motif — the hero signature ---- */
@@ -758,7 +792,7 @@ footer {
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <div class="tagline">Tactical autonomy software</div>
+    <div class="tagline">See everything. Decide first. Trust the mission.</div>
     <h1>The operator-canvas-to-mission layer for small-unit ISR.</h1>
     <div class="hero-body">
       <p>Edgeward turns the ATAK ecosystem into a drone orchestration platform. Operators draw zones and points of interest on the map they already use. The software plans the mission, watches for other aircraft along the way, and reports back through the same map.</p>

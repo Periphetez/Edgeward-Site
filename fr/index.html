@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Edgeward — Logiciel d'autonomie tactique</title>
-<meta name="description" content="Edgeward est un logiciel d'autonomie tactique pour les opérations ISR de petites unités. Transforme l'écosystème ATAK en plateforme d'orchestration de drones, avec évitement air-air monoculaire intégré. Conçu au Canada, indépendant du matériel, bâti sur des normes ouvertes.">
+<meta name="description" content="Voyez tout. Décidez les premiers. Faites confiance à la mission. Edgeward est un logiciel d'autonomie tactique pour les opérations ISR de petites unités. Transforme l'écosystème ATAK en plateforme d'orchestration de drones. Conçu au Canada, indépendant du matériel, bâti sur des normes ouvertes.">
 <link rel="alternate" hreflang="en" href="https://edgeward.ca/">
 <link rel="alternate" hreflang="fr" href="https://edgeward.ca/fr/">
 
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://edgeward.ca/fr/">
 <meta property="og:title" content="Edgeward — Logiciel d'autonomie tactique">
-<meta property="og:description" content="Exécution de mission autonome avec évitement d'aéronefs intégré. Transforme l'écosystème ATAK en plateforme d'orchestration de drones. Conçu au Canada, indépendant du matériel.">
+<meta property="og:description" content="Voyez tout. Décidez les premiers. Faites confiance à la mission. Logiciel d'autonomie tactique qui transforme l'écosystème ATAK en plateforme d'orchestration de drones. Conçu au Canada, indépendant du matériel.">
 <meta property="og:image" content="https://edgeward.ca/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -25,7 +25,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Edgeward — Logiciel d'autonomie tactique">
-<meta name="twitter:description" content="Exécution de mission autonome avec évitement d'aéronefs intégré. Conçu au Canada, indépendant du matériel.">
+<meta name="twitter:description" content="Voyez tout. Décidez les premiers. Faites confiance à la mission. Logiciel d'autonomie tactique pour l'écosystème ATAK. Conçu au Canada, indépendant du matériel.">
 <meta name="twitter:image" content="https://edgeward.ca/assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,15 +141,49 @@ header {
 .hero {
   padding: 120px 0 100px;
   position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 85% at 92% -8%, rgba(178, 59, 59, 0.16), transparent 58%),
+    radial-gradient(ellipse 50% 55% at 6% 108%, rgba(16, 32, 48, 0.5), transparent 62%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -12%;
+  left: -6%;
+  width: 62%;
+  height: 130%;
+  background: url('/assets/topo-overlay.svg') no-repeat left top;
+  background-size: cover;
+  opacity: 0.11;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 100%);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .tagline {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.10em;
   color: var(--accent);
   margin-bottom: 32px;
+  line-height: 1.7;
 }
 
 /* ---- Bearing motif — the hero signature ---- */
@@ -758,7 +792,7 @@ footer {
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <div class="tagline">Logiciel d'autonomie tactique</div>
+    <div class="tagline">Voyez tout. Décidez les premiers. Faites confiance à la mission.</div>
     <h1>La couche logicielle qui relie l'intention de l'opérateur à la mission, pour l'ISR de petites unités.</h1>
     <div class="hero-body">
       <p>Edgeward transforme l'écosystème ATAK en plateforme d'orchestration de drones. Les opérateurs dessinent des zones et des points d'intérêt sur la carte qu'ils utilisent déjà. Le logiciel planifie la mission, surveille les autres aéronefs en cours de route, et rend compte par la même carte.</p>
