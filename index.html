@@ -85,22 +85,17 @@ header {
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.mark {
-  width: 32px;
-  height: 32px;
+  display: block;
   flex-shrink: 0;
 }
 
-.wordmark {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--paper);
+.brand-logo {
+  display: block;
+  width: 160px;
+  height: 76px;
+  object-fit: cover;
+  object-position: center 43%;
+  mix-blend-mode: lighten;
 }
 
 .header-meta {
@@ -728,6 +723,21 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .brand-logo {
+    width: 128px;
+    height: 60px;
+  }
+
+  .header-meta {
+    gap: 12px;
+  }
+
+  .header-right {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    font-size: 10px;
+  }
   .capabilities {
     grid-template-columns: 1fr;
   }
@@ -771,15 +781,9 @@ footer {
 <header>
   <div class="container">
     <div class="header-meta">
-      <div class="brand">
-        <svg class="mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#F1EEE6">
-            <rect x="64" y="340" width="384" height="12"/>
-            <polygon points="256,192 272,192 344,296 316,296 256,210 196,296 168,296"/>
-          </g>
-        </svg>
-        <div class="wordmark">Edgeward</div>
-      </div>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="assets/edgeward-header-logo.png" alt="Edgeward" width="1254" height="1254">
+      </a>
       <div class="header-right">
         <div class="lang-switch">
           <a href="/" class="active">EN</a><span>/</span><a href="/fr/">FR</a>
