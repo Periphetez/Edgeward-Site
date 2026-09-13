@@ -917,7 +917,7 @@ footer {
     <div class="capabilities">
       <div class="capability">
         <h3>Perception</h3>
-        <p>Real-time object detection and behavior classification on edge hardware. Six configurable rules: loitering, perimeter breach, after-hours, vehicle dismount, convergence, fence approach.</p>
+        <p>Real-time object detection and behavior classification on edge hardware. Real-time person and vehicle detection and tracking on edge hardware, with ground-target geolocation. Flight-validated on real hardware.</p>
       </div>
       <div class="capability">
         <h3>Avoidance</h3>
@@ -929,7 +929,7 @@ footer {
       </div>
       <div class="capability">
         <h3>Execution</h3>
-        <p>Generates orbit, lawnmower, and patrol routes from operator intent. Routes appear on the ATAK map for review; operator approves; UAS Tool plugin translates to MAVLink. Operator stays in the loop.</p>
+        <p>Planned: generates orbit, lawnmower, and patrol routes from operator intent, for review and approval before execution. Currently in development -- not yet flight-validated.</p>
       </div>
     </div>
   </div>
@@ -947,13 +947,9 @@ footer {
       <div>
         <div class="section-subhead">Validated today</div>
         <ul class="status-list">
-          <li>On-device perception pipeline on NVIDIA Jetson: YOLOv8 detection + ByteTrack multi-object tracking</li>
-          <li>Aircraft-to-aircraft avoidance from a single monocular camera — no LiDAR required</li>
-          <li>Bearings-only tracking validated to 0.8–5.0% time-to-closest-approach accuracy across multiple closing geometries</li>
-          <li>Full detection-to-alert chain validated end-to-end on real flight-controller hardware</li>
-          <li>Dual autopilot support — ArduPilot and PX4</li>
-          <li>Two-way Cursor-on-Target — alerts out, drawn zones in</li>
-          <li>Ghost-mode by design: avoidance alerting is proven before any autonomous control action is enabled</li>
+          <li>Flight-validated: onboard person and vehicle detection, ground-target geolocation, and live two-way ATAK/CoT reporting -- proven in real flight testing, September 2026.</li>
+          <li>Bench and simulation-validated: aircraft-to-aircraft detect-and-avoid from a single monocular camera. Bearings-only tracking validated to 0.8-5.0% time-to-closest-approach accuracy (static scenarios). Airborne validation is the next milestone.</li>
+          <li>In development: autonomous mission planning and execution.</li>
         </ul>
       </div>
 
@@ -974,7 +970,7 @@ footer {
           </div>
           <div class="spec">
             <div class="spec-label">Autopilots</div>
-            <div class="spec-value">ArduPilot · PX4 · any MAVLink-class</div>
+            <div class="spec-value">ArduPilot (flight-validated) · PX4 (MAVLink-compatible, not yet flight-tested)</div>
           </div>
           <div class="spec">
             <div class="spec-label">Edge compute</div>
@@ -1001,7 +997,7 @@ footer {
     <div class="use-cases">
       <div class="use-case">
         <h3>Forward operating base perimeter</h3>
-        <p>Persistent overwatch of FOB approaches with operator-tuned rules of engagement.</p>
+        <p>Persistent overwatch of FOB approaches and access points.</p>
       </div>
       <div class="use-case">
         <h3>Critical infrastructure</h3>
