@@ -617,10 +617,13 @@ footer {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.video-frame video {
+.video-frame iframe {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
+  border: 0;
   background: #000;
 }
 
@@ -824,19 +827,19 @@ footer {
 <section class="video-section">
   <div class="container">
     <div class="section-label">En action</div>
-    <h2>De l'intention de l'opérateur à la mission autonome, de bout en bout.</h2>
+    <h2>Vol réel. Détection embarquée. Transmission ATAK en direct.</h2>
     <div class="video-frame">
-      <video
-        src="../assets/edgeward-tactical.mp4"
-        controls
-        playsinline
-        preload="metadata"
-        poster=""
-      >
-        Votre navigateur ne prend pas en charge la balise vidéo.
-      </video>
+      <iframe
+        src="https://www.youtube.com/embed/4XseMFF_3HM?playsinline=1&amp;rel=0&amp;hl=fr"
+        title="Edgeward — essai en vol réel avec détection embarquée et transmission ATAK en direct"
+        width="960"
+        height="540"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
     </div>
-    <div class="video-caption">Edgeward — démonstration tactique</div>
+    <div class="video-caption">Essai en vol réel — détection embarquée et transmission ATAK en direct.</div>
   </div>
 </section>
 
