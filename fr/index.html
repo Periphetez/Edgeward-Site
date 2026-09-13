@@ -917,7 +917,7 @@ footer {
     <div class="capabilities">
       <div class="capability">
         <h3>Perception</h3>
-        <p>Détection d'objets et classification de comportements en temps réel sur du matériel en périphérie. Six règles configurables : flânerie, franchissement de périmètre, activité hors heures, débarquement de véhicule, convergence, approche de clôture.</p>
+        <p>Détection et suivi de personnes et de véhicules en temps réel sur du matériel en périphérie, avec géolocalisation des cibles au sol. Validés en vol sur du matériel réel.</p>
       </div>
       <div class="capability">
         <h3>Évitement</h3>
@@ -929,7 +929,7 @@ footer {
       </div>
       <div class="capability">
         <h3>Exécution</h3>
-        <p>Génère des routes d'orbite, de tonte et de patrouille à partir de l'intention de l'opérateur. Les routes apparaissent sur la carte ATAK pour révision; l'opérateur approuve; le module UAS Tool les traduit en MAVLink. L'opérateur demeure dans la boucle.</p>
+        <p>Prévu : génération de trajectoires en orbite, en balayage et en patrouille à partir de l'intention de l'opérateur, pour examen et approbation avant exécution. En cours de développement — pas encore validé en vol.</p>
       </div>
     </div>
   </div>
@@ -941,19 +941,13 @@ footer {
 <section>
   <div class="container">
     <div class="section-label">État actuel</div>
-    <h2>Prototype fonctionnel. Testé de bout en bout.</h2>
 
     <div class="status-grid">
       <div>
-        <div class="section-subhead">Validé à ce jour</div>
         <ul class="status-list">
-          <li>Chaîne de perception en périphérie sur NVIDIA Jetson : détection YOLOv8 + suivi multi-objets ByteTrack</li>
-          <li>Évitement air-air à partir d'une seule caméra monoculaire — aucun LiDAR requis</li>
-          <li>Suivi basé uniquement sur l'angle validé avec une précision de 0,8 à 5,0 % sur le temps avant l'approche la plus rapprochée, selon plusieurs géométries de rapprochement</li>
-          <li>Chaîne complète de détection à alerte validée de bout en bout sur un véritable contrôleur de vol</li>
-          <li>Prise en charge de deux pilotes automatiques — ArduPilot et PX4</li>
-          <li>Cursor-on-Target bidirectionnel — alertes sortantes, zones dessinées entrantes</li>
-          <li>Conçu en mode « fantôme » : la fiabilité des alertes d'évitement est prouvée avant l'activation de toute action de contrôle autonome</li>
+          <li><strong>Validé en vol :</strong> détection embarquée de personnes et de véhicules, géolocalisation des cibles au sol et transmission bidirectionnelle en direct via ATAK/CoT — démontrées lors d'essais en vol réels, en septembre 2026.</li>
+          <li><strong>Validé sur banc et en simulation :</strong> détection et évitement entre aéronefs à partir d'une seule caméra monoculaire. Suivi basé uniquement sur l'angle validé avec une précision de 0,8–5,0 % sur le temps avant l'approche la plus rapprochée (scénarios statiques). La validation en vol constitue la prochaine étape.</li>
+          <li><strong>En développement :</strong> planification et exécution autonomes de missions.</li>
         </ul>
       </div>
 
@@ -974,7 +968,7 @@ footer {
           </div>
           <div class="spec">
             <div class="spec-label">Pilotes automatiques</div>
-            <div class="spec-value">ArduPilot · PX4 · tout système de classe MAVLink</div>
+            <div class="spec-value">ArduPilot (validé en vol) · PX4 (compatible MAVLink, pas encore testé en vol)</div>
           </div>
           <div class="spec">
             <div class="spec-label">Calcul en périphérie</div>
@@ -1001,7 +995,7 @@ footer {
     <div class="use-cases">
       <div class="use-case">
         <h3>Périmètre de base d'opérations avancée</h3>
-        <p>Surveillance persistante des approches de la base selon des règles d'engagement ajustées par l'opérateur.</p>
+        <p>Surveillance persistante des approches et des points d'accès de la base d'opérations avancée.</p>
       </div>
       <div class="use-case">
         <h3>Infrastructures critiques</h3>
