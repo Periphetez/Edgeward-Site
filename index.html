@@ -669,6 +669,59 @@ footer {
   gap: 14px;
 }
 
+/* ---- Deconfliction proof and media ---- */
+.proof-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.proof {
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+.proof-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+}
+.proof-label {
+  font-size: 13px;
+  color: var(--paper-muted);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.media-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 40px;
+  align-items: start;
+}
+.media-pair figure {
+  background: var(--ink-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.media-pair figure:nth-child(2) {
+  max-width: 560px;
+}
+.media-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.media-pair figcaption {
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .container {
@@ -697,6 +750,15 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 28px;
   }
+
+  .proof-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .media-pair {
+    grid-template-columns: 1fr;
+  }
+
 
   .bearing {
     margin-top: 48px;
@@ -938,6 +1000,76 @@ footer {
         <h3>Execution</h3>
         <p>Planned: generates orbit, lawnmower, and patrol routes from operator intent, for review and approval before execution. Currently in development — not yet flight-validated.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Deconfliction -->
+<section>
+  <div class="container">
+    <div class="section-label">Deconfliction</div>
+    <h2>One laptop. No cloud. Every plan checked before it flies.</h2>
+    <div class="section-body">
+      <p>Edgeward's 4D deconfliction tool checks each flight plan against every other plan, no-fly volumes, weather and radio-frequency needs, and proposes the least disruptive fix. Positions come from the ground station the pilot already uses, so nothing is added to the aircraft. Results appear as 4D blocks and live tracks on WinTAK, using standard Cursor-on-Target.</p>
+    </div>
+
+    <div class="arch">
+      <div class="arch-node">
+        <div class="arch-node-label">Aircraft + ground station</div>
+        <div class="arch-node-title">Any MAVLink autopilot</div>
+        <div class="arch-node-desc">QGroundControl or Mission Planner.<br>Forwards MAVLink.<br>Nothing added to the aircraft.</div>
+      </div>
+
+      <div class="arch-arrow">
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M0 5 L26 5 M22 1 L26 5 L22 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M32 5 L6 5 M10 1 L6 5 L10 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="arch-node">
+        <div class="arch-node-label">Edgeward</div>
+        <div class="arch-node-title">Deconfliction app</div>
+        <div class="arch-node-desc">4D plan check · RF check<br>Plan repository + audit log<br>Conformance monitor</div>
+      </div>
+
+      <div class="arch-arrow">
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M0 5 L26 5 M22 1 L26 5 L22 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M32 5 L6 5 M10 1 L6 5 L10 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="arch-node">
+        <div class="arch-node-label">Operator</div>
+        <div class="arch-node-title">WinTAK</div>
+        <div class="arch-node-desc">4D blocks and live tracks.<br>Off-plan alerts.<br>Approve or override.</div>
+      </div>
+    </div>
+    <div class="arch-footer" style="margin-top: 16px;">MAVLink in. Cursor-on-Target out.<br>One Windows laptop, no cloud.</div>
+
+    <div class="proof-row">
+      <div class="proof"><div class="proof-num">203</div><div class="proof-label">automated tests, run on Windows and Linux</div></div>
+      <div class="proof"><div class="proof-num">~20 ms</div><div class="proof-label">median decision time over 200 random requests</div></div>
+      <div class="proof"><div class="proof-num">2 s</div><div class="proof-label">from off-plan alert to a proposed route back (simulation)</div></div>
+      <div class="proof"><div class="proof-num">3</div><div class="proof-label">real flights validating onboard detection and geolocation</div></div>
+    </div>
+
+    <div class="media-pair">
+      <figure>
+        <img src="/assets/operator-live.png" width="1200" height="540" loading="lazy" alt="Edgeward operator page: one demo aircraft off plan by 134 metres and a proposed route back waiting for the operator to approve or reject">
+        <figcaption>Operator page: an aircraft leaves its plan and a route back is proposed for the operator to approve (simulated demo aircraft)</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/oct4-test-rig.jpg" width="1200" height="909" loading="lazy" alt="Test rig in a yellow case: flight controller, Jetson computer and screen showing the Edgeward desktop">
+        <figcaption>Hardware-in-the-loop test rig, October 2026: real flight controller on a moving vehicle</figcaption>
+      </figure>
     </div>
   </div>
 </section>

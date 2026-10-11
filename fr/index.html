@@ -669,6 +669,59 @@ footer {
   gap: 14px;
 }
 
+/* ---- Deconfliction proof and media ---- */
+.proof-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.proof {
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+.proof-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+}
+.proof-label {
+  font-size: 13px;
+  color: var(--paper-muted);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.media-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 40px;
+  align-items: start;
+}
+.media-pair figure {
+  background: var(--ink-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.media-pair figure:nth-child(2) {
+  max-width: 560px;
+}
+.media-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.media-pair figcaption {
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .container {
@@ -697,6 +750,15 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 28px;
   }
+
+  .proof-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .media-pair {
+    grid-template-columns: 1fr;
+  }
+
 
   .bearing {
     margin-top: 48px;
@@ -938,6 +1000,76 @@ footer {
         <h3>Exécution</h3>
         <p>Prévu : génération de trajectoires en orbite, en balayage et en patrouille à partir de l'intention de l'opérateur, pour examen et approbation avant exécution. En cours de développement — pas encore validé en vol.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- Deconfliction -->
+<section>
+  <div class="container">
+    <div class="section-label">Déconfliction</div>
+    <h2>Un ordinateur. Aucun nuage. Chaque plan vérifié avant le vol.</h2>
+    <div class="section-body">
+      <p>L'outil de déconfliction 4D d'Edgeward vérifie chaque plan de vol par rapport à tous les autres plans, aux zones interdites, à la météo et aux besoins en radiofréquences, puis propose la correction la moins perturbatrice. Les positions proviennent de la station au sol que le pilote utilise déjà : rien n'est ajouté à l'aéronef. Les résultats s'affichent sous forme de blocs 4D et de traces en direct dans WinTAK, au moyen du Cursor-on-Target standard.</p>
+    </div>
+
+    <div class="arch">
+      <div class="arch-node">
+        <div class="arch-node-label">Aéronef + station au sol</div>
+        <div class="arch-node-title">Tout pilote automatique MAVLink</div>
+        <div class="arch-node-desc">QGroundControl ou Mission Planner.<br>Transmet le MAVLink.<br>Rien n'est ajouté à l'aéronef.</div>
+      </div>
+
+      <div class="arch-arrow">
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M0 5 L26 5 M22 1 L26 5 L22 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M32 5 L6 5 M10 1 L6 5 L10 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="arch-node">
+        <div class="arch-node-label">Edgeward</div>
+        <div class="arch-node-title">Application de déconfliction</div>
+        <div class="arch-node-desc">Vérification de plan 4D · radiofréquences<br>Registre des plans et journal d'audit<br>Surveillance de conformité</div>
+      </div>
+
+      <div class="arch-arrow">
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M0 5 L26 5 M22 1 L26 5 L22 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+        <svg width="32" height="10" viewBox="0 0 32 10" fill="currentColor">
+          <path d="M32 5 L6 5 M10 1 L6 5 L10 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="arch-node">
+        <div class="arch-node-label">Opérateur</div>
+        <div class="arch-node-title">WinTAK</div>
+        <div class="arch-node-desc">Blocs 4D et traces en direct.<br>Alertes hors plan.<br>Approuver ou outrepasser.</div>
+      </div>
+    </div>
+    <div class="arch-footer" style="margin-top: 16px;">MAVLink en entrée. Cursor-on-Target en sortie.<br>Un ordinateur Windows, aucun nuage.</div>
+
+    <div class="proof-row">
+      <div class="proof"><div class="proof-num">203</div><div class="proof-label">tests automatisés, exécutés sous Windows et Linux</div></div>
+      <div class="proof"><div class="proof-num">~20 ms</div><div class="proof-label">temps de décision médian sur 200 requêtes aléatoires</div></div>
+      <div class="proof"><div class="proof-num">2 s</div><div class="proof-label">de l'alerte hors plan à la proposition d'un trajet de retour (simulation)</div></div>
+      <div class="proof"><div class="proof-num">3</div><div class="proof-label">vols réels validant la détection et la géolocalisation embarquées</div></div>
+    </div>
+
+    <div class="media-pair">
+      <figure>
+        <img src="/assets/operator-live.png" width="1200" height="540" loading="lazy" alt="Page de l'opérateur Edgeward : un aéronef de démonstration hors plan de 134 mètres et un trajet de retour proposé en attente d'approbation ou de rejet">
+        <figcaption>Page de l'opérateur : un aéronef quitte son plan et un trajet de retour est proposé à l'opérateur pour approbation (aéronefs de démonstration simulés)</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/oct4-test-rig.jpg" width="1200" height="909" loading="lazy" alt="Banc d'essai dans un boîtier jaune : contrôleur de vol, ordinateur Jetson et écran affichant le bureau Edgeward">
+        <figcaption>Banc d'essai matériel en boucle, octobre 2026 : vrai contrôleur de vol sur un véhicule en mouvement</figcaption>
+      </figure>
     </div>
   </div>
 </section>
