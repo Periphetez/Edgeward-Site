@@ -108,6 +108,15 @@ section.hero{padding:0}
 .legend{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:22px}
 .legend .chip{border:0;padding:0}
 
+/* capability cards (home) */
+.capgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.capcard{display:flex;flex-direction:column;background:var(--ink-2);border:1px solid var(--rule);border-radius:var(--r);padding:26px;text-decoration:none;transition:border-color .2s,transform .2s}
+.capcard:hover{border-color:var(--accent);transform:translateY(-3px)}
+.capcard h3{font-size:1.15rem}
+.capcard p{color:var(--soft);font-size:.95rem;margin:0}
+.capcard .chips{margin-top:16px}
+.capcard .more{margin-top:auto;padding-top:18px}
+
 /* roadmap */
 .road{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
 .road>div{background:var(--ink-2);border:1px solid var(--rule);border-radius:var(--r);padding:28px;position:relative}
@@ -213,6 +222,7 @@ section.hero{padding:0}
   .show.flip{grid-template-columns:1fr}
   .show.flip .screen{order:0}
   .who,.field,.road{grid-template-columns:1fr}
+  .capgrid{grid-template-columns:repeat(2,1fr)}
   .road>div:not(:last-child)::after{right:auto;left:50%;top:auto;bottom:-19px;transform:translateX(-50%) rotate(90deg)}
   .flow{grid-template-columns:1fr}
   .arrow{transform:rotate(90deg);justify-self:center}
@@ -242,7 +252,7 @@ section.hero{padding:0}
   .tag .mono{font-size:.6rem;letter-spacing:.1em}
   .hero-foot .wrap{gap:8px 22px}
   .strip .wrap{justify-content:flex-start}
-  .steps,.stats.three{grid-template-columns:1fr}
+  .steps,.stats.three,.capgrid{grid-template-columns:1fr}
   .stats.three .stat{border-right:0;border-bottom:1px solid var(--rule)}
   .stats.three .stat:last-child{border-bottom:0}
   .btns .btn{flex:1 1 auto;justify-content:center}

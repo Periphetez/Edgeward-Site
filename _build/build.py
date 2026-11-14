@@ -129,6 +129,12 @@ def show(c, detail=False, i=0):
     return f'<div class="show{flip} rv">{screen(lab, svg)}<div>{body}</div></div>\n'
 
 
+def card(c):
+    cid, num, lab, title, text, bullets, ch, svg = c
+    return (f'<a class="capcard" href="capabilities.html#{cid}"><span class="num"><b>{num}</b> / 04</span>'
+            f'<h3>{title}</h3><p>{text}</p>{chips(ch[:1])}<span class="more">How it works →</span></a>')
+
+
 # ------------------------------------------------------------------ HOME
 index = head("Edgeward | Autonomous drone operations on the TAK map",
              "See everything. Decide first. Trust the mission. Edgeward builds autonomy for drone teams: missions planned, deconflicted and reported back on the ATAK and WinTAK map they already carry. Canadian, Métis-owned, veteran-founded.",
@@ -149,8 +155,9 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
 
 <section>
   <div class="wrap">
-    <div class="section-head rv"><p class="eyebrow">What we build</p><h2>Four capabilities for drone teams.</h2><p class="lead">The pictures show where each one is headed. The tag beside it says exactly how far it has been tested today.</p></div>
-{''.join(show(c, False, i) for i, c in enumerate(CAPS))}  </div>
+    <div class="section-head rv"><p class="eyebrow">What we build</p><h2>Four capabilities for drone teams.</h2><p class="lead">Each one is tagged with exactly how far it has been tested today.</p></div>
+    <div class="capgrid rv">{''.join(card(c) for c in CAPS)}</div>
+  </div>
 </section>
 
 <section class="alt">
@@ -166,20 +173,6 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
 
 <section>
   <div class="wrap">
-    <div class="section-head rv"><p class="eyebrow">How it fits</p><h2>Plugs into the gear you already fly.</h2></div>
-    <div class="flow rv">
-      <div class="node"><span class="mono">Aircraft</span><strong>Your drone</strong><ul><li>MAVLink autopilots</li><li>Optional onboard computer for detection</li></ul></div>
-      <div class="arrow" aria-hidden="true">→</div>
-      <div class="node core"><span class="mono">Edgeward</span><strong>Planning &amp; awareness</strong><ul><li>4D plans and deconfliction</li><li>Detection and geolocation</li><li>Alerts and reroutes</li></ul></div>
-      <div class="arrow" aria-hidden="true">→</div>
-      <div class="node"><span class="mono">Operator</span><strong>ATAK &amp; WinTAK</strong><ul><li>One map for every aircraft</li><li>Approve or cancel from TAK</li></ul></div>
-    </div>
-    <p class="flow-note mono">MAVLink in · Cursor-on-Target out · No vendor lock-in</p>
-  </div>
-</section>
-
-<section class="alt">
-  <div class="wrap">
     <div class="section-head rv"><p class="eyebrow">Proven so far</p><h2>Real numbers, not promises.</h2></div>
     <div class="stats rv">
       <div class="stat"><b>3</b><span>real flights with onboard detection and geolocation</span></div>
@@ -190,7 +183,7 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
   </div>
 </section>
 
-<section>
+<section class="alt">
   <div class="wrap">
     <div class="section-head rv"><p class="eyebrow">Who it's for</p><h2>Built for the people who fly.</h2></div>
     <div class="who rv">
@@ -201,18 +194,6 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
   </div>
 </section>
 
-<section class="alt">
-  <div class="wrap founder">
-    <figure class="media rv"><img src="assets/img/airframe-integration.jpg" alt="Onboard computer and wiring integrated into a fixed-wing airframe" loading="lazy"><figcaption>Integrating onboard compute into a fixed-wing airframe.</figcaption></figure>
-    <div class="rv">
-      <p class="eyebrow">Why we exist</p>
-      <h2>Autonomous vehicles are the future. They need one place to work from.</h2>
-      <p class="lead">Instead of building yet another screen, we put the tasking and the results from autonomous work into the tool teams already use. Edgeward is led by an RCAF veteran who has run autonomous drone operations in the field.</p>
-      <div class="badges"><span>Canadian</span><span>Métis-owned</span><span>Veteran-founded</span></div>
-      <a class="more" href="about.html">About Edgeward →</a>
-    </div>
-  </div>
-</section>
 {CTA}</main>
 """ + FOOT
 
@@ -229,6 +210,21 @@ caps = head("Capabilities | Edgeward",
 
 <section class="alt">
   <div class="wrap">
+    <div class="section-head rv"><p class="eyebrow">How it fits</p><h2>Plugs into the gear you already fly.</h2></div>
+    <div class="flow rv">
+      <div class="node"><span class="mono">Aircraft</span><strong>Your drone</strong><ul><li>MAVLink autopilots</li><li>Optional onboard computer for detection</li></ul></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node core"><span class="mono">Edgeward</span><strong>Planning &amp; awareness</strong><ul><li>4D plans and deconfliction</li><li>Detection and geolocation</li><li>Alerts and reroutes</li></ul></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node"><span class="mono">Operator</span><strong>ATAK &amp; WinTAK</strong><ul><li>One map for every aircraft</li><li>Approve or cancel from TAK</li></ul></div>
+    </div>
+    <p class="flow-note mono">MAVLink in · Cursor-on-Target out · No vendor lock-in</p>
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
     <div class="section-head rv"><p class="eyebrow">From the field</p><h2>Built and tested on real hardware.</h2><p class="lead">The concept views show where we're headed. These show the work behind them.</p></div>
     <div class="field rv">
       <figure><img src="assets/img/detection-flight.jpg" alt="Aerial frame with onboard person and vehicle detection" loading="lazy"><figcaption>Onboard detection on a test flight, Sept 2026.</figcaption></figure>
@@ -238,7 +234,7 @@ caps = head("Capabilities | Edgeward",
   </div>
 </section>
 
-<section>
+<section class="alt">
   <div class="wrap">
     <div class="founder" style="margin-bottom:64px">
       <figure class="media rv"><img src="assets/img/airframe-integration.jpg" alt="Onboard computer and wiring integrated into a fixed-wing airframe" loading="lazy"><figcaption>Integrating onboard compute into a fixed-wing airframe.</figcaption></figure>
@@ -254,7 +250,7 @@ caps = head("Capabilities | Edgeward",
   </div>
 </section>
 
-<section class="alt">
+<section>
   <div class="wrap">
     <div class="section-head rv"><p class="eyebrow">Platforms &amp; standards</p><h2>What it works with.</h2></div>
     <div class="stats three rv">
