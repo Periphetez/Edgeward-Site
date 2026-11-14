@@ -130,15 +130,16 @@ def show(c, detail=False, i=0):
 
 
 # ------------------------------------------------------------------ HOME
-index = head("Edgeward | Custom drone software and TAK integration",
-             "Edgeward builds custom drone software and TAK integrations: mission planning, airspace deconfliction, one common operating picture, and onboard detection for search and rescue. Canadian, Métis-owned, veteran-founded.",
+index = head("Edgeward | Autonomous drone operations on the TAK map",
+             "See everything. Decide first. Trust the mission. Edgeward builds autonomy for drone teams: missions planned, deconflicted and reported back on the ATAK and WinTAK map they already carry. Canadian, Métis-owned, veteran-founded.",
              "index.html") + f"""<main>
 <section class="hero">
   <div class="hero-bg">{scenes.hero()}</div>
   <div class="wrap">
     <div class="tag"><span class="dot"></span><span class="mono">{TAGLINE}</span></div>
-    <h1>Custom drone software and TAK integration.</h1>
-    <p class="lead">Every aircraft, every team and every find on one map. We build the software that lets drone teams plan, deconflict and search together, inside the ATAK and WinTAK they already carry.</p>
+    <p class="kicker">See everything. Decide first. Trust the mission.</p>
+    <h1>One operator.<br>A fleet of drones.<br><span class="hl">One map.</span></h1>
+    <p class="lead">Edgeward is building the autonomy that lets drones plan, fly and report back on their own, tasked and tracked from the ATAK and WinTAK your team already carries. Built by a veteran who has run autonomous operations in the field.</p>
     <div class="btns"><a class="btn" href="capabilities.html">See what we build</a><a class="btn ghost" href="contact.html">Start a conversation</a></div>
   </div>
   <div class="hero-foot"><div class="wrap mono"><span>MAVLink in</span><span>Cursor-on-Target out</span><span>Runs offline</span><span class="live">Concept view of the Edgeward operating picture</span></div></div>
