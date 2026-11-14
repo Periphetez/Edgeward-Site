@@ -68,7 +68,7 @@ CTA = f"""<section class="cta">
   <div class="wrap rv">
     <p class="eyebrow">Work with us</p>
     <h2>Need custom drone software or a TAK integration?</h2>
-    <p class="lead">Tell us about your aircraft, your operators and the problem. We'll tell you honestly what we can build and how we'd test it.</p>
+    <p class="lead">Tell us about your aircraft, your team and the challenges you want to overcome. We'll come back with a clear plan for how our software can be built into a custom solution that works with you, and for you.</p>
     <div class="btns"><a class="btn" href="mailto:{EMAIL}">Email {EMAIL}</a><a class="btn ghost" href="capabilities.html">See capabilities</a></div>
   </div>
 </section>
@@ -308,7 +308,7 @@ about = head("About | Edgeward",
 contact = head("Contact | Edgeward",
                "Talk to Edgeward about custom drone software and TAK integration.",
                "contact.html") + f"""<main>
-<section class="page-head"><div class="wrap"><p class="eyebrow">Contact</p><h1>Let's talk about your drone program.</h1><p class="lead">Tell us what you fly, who operates it and what you need it to do.</p></div></section>
+<section class="page-head"><div class="wrap"><p class="eyebrow">Contact</p><h1>Let's talk about your drone program.</h1><p class="lead">Tell us what you fly, who flies it and what you want it to do. We'll come back with a plan built around you.</p></div></section>
 <section>
   <div class="wrap contact-grid">
     <div class="contact-box rv">
