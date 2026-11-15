@@ -169,7 +169,7 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
     <p class="kicker">See everything. Decide first. Trust the mission.</p>
     <h1>One operator.<br>A fleet of drones.<br><span class="hl">One map.</span></h1>
     <p class="lead">Edgeward is building the autonomy that lets drones plan, fly and report back on their own, tasked and tracked from the ATAK and WinTAK your team already carries. Built by a veteran who has run autonomous operations in the field.</p>
-    <div class="btns"><a class="btn" href="capabilities.html">See what we build</a><a class="btn ghost" href="capabilities.html#demos">Watch the demos</a></div>
+    <div class="btns"><a class="btn" href="capabilities.html">See what we build</a><a class="btn ghost" href="{YT}">Watch the demos</a></div>
   </div>
   <div class="hero-foot"><div class="wrap mono"><span>MAVLink in</span><span>Cursor-on-Target out</span><span>Runs offline</span><span class="live">Concept view of the Edgeward operating picture</span></div></div>
 </section>
@@ -273,15 +273,7 @@ caps = head("Capabilities | Edgeward",
   </div>
 </section>
 
-<section id="demos" style="scroll-margin-top:72px">
-  <div class="wrap">
-    <div class="section-head rv"><p class="eyebrow">Demos</p><h2>Watch it work.</h2><p class="lead">Short videos of each feature as it was built. Each one says whether it's simulation or flight.</p></div>
-    <div class="demos rv">""" + "".join(demo_card(v) for v in VIDEOS) + f"""</div>
-    <p class="flow-note mono"><a href="{YT}" style="color:inherit">More on our YouTube channel →</a></p>
-  </div>
-</section>
-
-<section class="alt">
+<section>
   <div class="wrap">
     <div class="section-head rv"><p class="eyebrow">Platforms &amp; standards</p><h2>What it works with.</h2></div>
     <div class="stats three rv">
