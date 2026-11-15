@@ -118,12 +118,34 @@ CAPS = [
 ]
 
 
+# YouTube demos: id, title, length, honest test label
+VIDEOS = [
+    ("vlFKHVtb1XA", "Off-plan alert and operator-approved reroute in WinTAK", "0:47", "sim", "Simulation"),
+    ("DU9ia2neNSw", "Off-plan aircraft flagged in seconds", "1:39", "sim", "ArduPilot simulation"),
+    ("owoK8Ph-H1Q", "Drone deconfliction on TAK: walkthrough", "2:13", "sim", "Simulation"),
+    ("3qRIRZOXNsI", "Autonomous zone response: draw a zone in ATAK, drone responds", "1:27", "sim", "Simulation · real ATAK"),
+    ("4XseMFF_3HM", "First flight test: onboard detection on the ATAK map", "0:34", "flight", "Flight test · TAK from recorded data"),
+]
+CAP_VIDEO = {"deconfliction": "vlFKHVtb1XA", "one-map": "3qRIRZOXNsI", "detection": "4XseMFF_3HM"}
+
+
+def watch(yt, label="Watch it work"):
+    return f'<button class="watch" type="button" data-yt="{yt}"><span class="play" aria-hidden="true"></span>{label}</button>'
+
+
+def demo_card(v):
+    yt, title, length, cls, tag = v
+    return (f'<button class="demo" type="button" data-yt="{yt}"><span class="thumb" style="background-image:url(https://i.ytimg.com/vi/{yt}/hqdefault.jpg)">'
+            f'<span class="play" aria-hidden="true"></span><span class="len">{length}</span></span>'
+            f'<span class="dbody"><span class="chip {cls}">{tag}</span><span class="dt">{title}</span></span></button>')
+
+
 def show(c, detail=False, i=0):
     cid, num, lab, title, text, bullets, ch, svg = c
     flip = " flip" if i % 2 else ""
     if detail:
         body = (f'<span class="num"><b>{num}</b> / 04</span><h2>{title}</h2><p>{text}</p><ul>'
-                + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>" + chips(ch))
+                + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>" + chips(ch) + (watch(CAP_VIDEO[cid]) if cid in CAP_VIDEO else ''))
         return f'<div class="show{flip} rv" id="{cid}" style="scroll-margin-top:90px">{screen(lab, svg)}<div>{body}</div></div>\n'
     body = (f'<span class="num"><b>{num}</b> / 04</span><h3>{title}</h3><p>{text}</p>{chips(ch[:1])}'
             f'<a class="more" href="capabilities.html#{cid}">How it works →</a>')
@@ -147,7 +169,7 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
     <p class="kicker">See everything. Decide first. Trust the mission.</p>
     <h1>One operator.<br>A fleet of drones.<br><span class="hl">One map.</span></h1>
     <p class="lead">Edgeward is building the autonomy that lets drones plan, fly and report back on their own, tasked and tracked from the ATAK and WinTAK your team already carries. Built by a veteran who has run autonomous operations in the field.</p>
-    <div class="btns"><a class="btn" href="capabilities.html">See what we build</a><a class="btn ghost" href="contact.html">Start a conversation</a></div>
+    <div class="btns"><a class="btn" href="capabilities.html">See what we build</a><a class="btn ghost" href="capabilities.html#demos">Watch the demos</a></div>
   </div>
   <div class="hero-foot"><div class="wrap mono"><span>MAVLink in</span><span>Cursor-on-Target out</span><span>Runs offline</span><span class="live">Concept view of the Edgeward operating picture</span></div></div>
 </section>
@@ -251,7 +273,15 @@ caps = head("Capabilities | Edgeward",
   </div>
 </section>
 
-<section>
+<section id="demos" style="scroll-margin-top:72px">
+  <div class="wrap">
+    <div class="section-head rv"><p class="eyebrow">Demos</p><h2>Watch it work.</h2><p class="lead">Short videos of each feature as it was built. Each one says whether it's simulation or flight.</p></div>
+    <div class="demos rv">""" + "".join(demo_card(v) for v in VIDEOS) + f"""</div>
+    <p class="flow-note mono"><a href="{YT}" style="color:inherit">More on our YouTube channel →</a></p>
+  </div>
+</section>
+
+<section class="alt">
   <div class="wrap">
     <div class="section-head rv"><p class="eyebrow">Platforms &amp; standards</p><h2>What it works with.</h2></div>
     <div class="stats three rv">
