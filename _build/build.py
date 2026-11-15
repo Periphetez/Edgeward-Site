@@ -7,6 +7,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 EMAIL = "contact@edgeward.ca"
 LI = "https://www.linkedin.com/company/edgewardisr/"
 IG = "https://www.instagram.com/edgewardisr/"
+YT = "https://www.youtube.com/@Edge_Ward_ISR"
 NAV = [("index.html", "Home"), ("capabilities.html", "Capabilities"), ("about.html", "About")]
 TAGLINE = "Canadian · Métis-owned · Veteran-founded"
 
@@ -56,7 +57,7 @@ def head(title, desc, path):
 FOOT = f"""<footer class="site-foot">
   <div class="wrap">
     <div><img src="assets/img/logo-wordmark.png" alt="Edgeward" width="88" height="38"><p style="margin:12px 0 0">Edgeward Inc. · {TAGLINE}</p></div>
-    <nav><a href="capabilities.html">Capabilities</a><a href="about.html">About</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{LI}">LinkedIn</a><a href="{IG}">Instagram</a></nav>
+    <nav><a href="capabilities.html">Capabilities</a><a href="about.html">About</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{LI}">LinkedIn</a><a href="{IG}">Instagram</a><a href="{YT}">YouTube</a></nav>
   </div>
 </footer>
 <script src="assets/site.js"></script>
@@ -312,7 +313,7 @@ contact = head("Contact | Edgeward",
       <p class="mono">Email</p>
       <p><a class="big" href="mailto:{EMAIL}">{EMAIL}</a></p>
       <p class="muted" style="margin-top:24px">Based in Alberta. Working with teams across Canada.</p>
-      <p style="margin:0"><a href="{LI}">LinkedIn</a> · <a href="{IG}">Instagram</a></p>
+      <p style="margin:0"><a href="{LI}">LinkedIn</a> · <a href="{IG}">Instagram</a> · <a href="{YT}">YouTube</a></p>
     </div>
     <div class="contact-box rv">
       <p class="mono">Helpful to include</p>
