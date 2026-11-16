@@ -123,6 +123,12 @@ def show(c, i=0):
     return f'<div class="show{flip} rv" id="{cid}" style="scroll-margin-top:90px">{screen(lab, svg)}<div>{body}</div></div>\n'
 
 
+def card(c):
+    cid, num, lab, title, text, bullets, ch, svg = c
+    return (f'<a class="capcard" href="capabilities.html#{cid}"><span class="num"><b>{num}</b> / 04</span>'
+            f'<h3>{title}</h3><p>{text}</p>{chips(ch[:1])}<span class="more">Learn more →</span></a>')
+
+
 # ------------------------------------------------------------------ HOME
 index = head("Edgeward | Autonomous drone operations on the TAK map",
              "See everything. Decide first. Trust the mission. Edgeward builds autonomy for drone teams on the ATAK and WinTAK map they already carry. Canadian, Métis-owned, veteran-founded.",
@@ -132,10 +138,27 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
   <div class="wrap">
     <div class="tag"><span class="dot"></span><span class="mono">{TAGLINE}</span></div>
     <h1>One operator.<br>A fleet of drones.<br><span class="hl">One map.</span></h1>
-    <div class="btns"><a class="btn" href="capabilities.html">See what we build</a><a class="btn ghost" href="about.html">Start a conversation</a></div>
+    <div class="btns"><a class="btn" href="capabilities.html">See what we build</a><a class="btn ghost" href="contact.html">Start a conversation</a></div>
   </div>
 </section>
-</main>
+
+<section>
+  <div class="wrap">
+    <div class="capgrid rv">{''.join(card(c) for c in CAPS)}</div>
+  </div>
+</section>
+
+<section class="alt" style="padding:56px 0">
+  <div class="wrap">
+    <div class="stats rv">
+      <div class="stat"><b>3</b><span>flights with onboard detection</span></div>
+      <div class="stat"><b>203</b><span>automated tests</span></div>
+      <div class="stat"><b>~20 ms</b><span>to flag a conflict</span></div>
+      <div class="stat"><b>0</b><span>cloud needed. Runs offline.</span></div>
+    </div>
+  </div>
+</section>
+{CTA}</main>
 """ + FOOT
 
 # ------------------------------------------------------------------ CAPABILITIES
