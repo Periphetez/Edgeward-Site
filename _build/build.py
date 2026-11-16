@@ -116,10 +116,19 @@ CAPS = [
 ]
 
 
+LONG = {
+    "deconfliction": "Every flight is checked against every other aircraft, no-fly zone and the weather before it leaves the ground. If one drifts off plan, the operator gets a fix to approve.",
+    "one-map": "Positions, plans and alerts for the whole fleet, inside ATAK and WinTAK. No new screens for your operators to learn.",
+    "detection": "The aircraft spots people and vehicles itself, works out where they are on the ground, and puts them on the map.",
+    "daa": "One onboard camera watches for other aircraft, warns the operator and can steer clear. No LiDAR and no ground link needed.",
+}
+
+
 def show(c, i=0):
     cid, num, lab, title, text, bullets, ch, svg = c
     flip = " flip" if i % 2 else ""
-    body = f'<span class="num"><b>{num}</b> / 04</span><h2>{title}</h2><p>{text}</p>{chips(ch)}'
+    body = (f'<span class="num"><b>{num}</b> / 04</span><h2>{title}</h2><p>{LONG[cid]}</p><ul>'
+            + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>" + chips(ch))
     return f'<div class="show{flip} rv" id="{cid}" style="scroll-margin-top:90px">{screen(lab, svg)}<div>{body}</div></div>\n'
 
 
@@ -165,10 +174,33 @@ index = head("Edgeward | Autonomous drone operations on the TAK map",
 caps = head("Capabilities | Edgeward",
             "Mission planning and deconfliction, one map in TAK, onboard detection, and detect and avoid.",
             "capabilities.html") + f"""<main>
-<section class="page-head"><div class="wrap"><p class="eyebrow">Capabilities</p><h1>What we build.</h1></div></section>
+<section class="page-head"><div class="wrap"><p class="eyebrow">Capabilities</p><h1>What we build.</h1><p class="lead">Four capabilities, each tagged with exactly how far it has been tested.</p>
+<div class="legend"><span class="chip flight">Flight-tested</span><span class="chip sim">Simulation or hardware-in-the-loop</span><span class="chip bench">Bench or recorded data</span></div></div></section>
 <section style="padding-top:24px">
   <div class="wrap">
 {''.join(show(c, i) for i, c in enumerate(CAPS))}  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head rv"><p class="eyebrow">From the field</p><h2>Built and tested on real hardware.</h2></div>
+    <div class="field rv">
+      <figure><img src="assets/img/detection-flight.jpg" alt="Aerial frame with onboard person and vehicle detection" loading="lazy"><figcaption>Onboard detection on a test flight, Sept 2026.</figcaption></figure>
+      <figure><img src="assets/img/hil-field-kit.jpg" alt="Hardware-in-the-loop kit in a vehicle" loading="lazy"><figcaption>Hardware-in-the-loop testing on a moving vehicle, Oct 2026.</figcaption></figure>
+      <figure><img src="assets/img/onboard-compute.jpg" alt="NVIDIA Jetson and Pixhawk 6X" loading="lazy"><figcaption>Onboard compute: NVIDIA Jetson with a Pixhawk 6X.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head rv"><p class="eyebrow">Works with</p><h2>Open standards, no lock-in.</h2></div>
+    <div class="stats three rv">
+      <div class="stat"><b>Autopilots</b><span>ArduPilot (flight-tested) · PX4 (MAVLink-compatible, not yet flight-tested)</span></div>
+      <div class="stat"><b>TAK</b><span>ATAK · WinTAK · FreeTAKServer · Cursor-on-Target</span></div>
+      <div class="stat"><b>Onboard</b><span>NVIDIA Jetson · single-camera perception</span></div>
+    </div>
+  </div>
 </section>
 {CTA}</main>
 """ + FOOT
