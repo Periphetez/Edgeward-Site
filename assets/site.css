@@ -62,6 +62,9 @@ p{margin:0 0 14px}
 .hero-foot .live{margin-left:auto;color:var(--muted)}
 .hero-foot .live::before{display:none}
 
+.hero-full{min-height:calc(100vh - 73px);min-height:calc(100svh - 73px)}
+.hero-full>.wrap{padding-bottom:90px}
+
 /* sections */
 section{padding:104px 0}
 section.hero{padding:0}
